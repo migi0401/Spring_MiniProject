@@ -43,15 +43,37 @@
 ## 5. 🔥 트러블 슈팅 (Trouble Shooting)
 > 개발 중 발생한 문제와 해결 과정을 기록했습니다.
 
-### 1)
+### 1) 자바 & 스프링부트 버전 다운그레이드
+자바 25 와 부트 4.0.2 에서 자바 21 과 부트 3.5.10 으로 변경하고자 하였습니다. 허나, 기존 단위 테스트를 실행하였을 때 쿼리가 보내지지 않는 문제가 발생하였음을 확인하였습니다.
+Cannot compare left expression of type 'Member' with right expression of type 'String' 이러한 로그가 뜨는 것을 발견하였고, 
+Member 타입의 member를 String타입으로 검색하려고 하여 오류가 발생하는 것을 인지하였습니다.
+비슷한 오류로 Cannot compare left expression of type 'java.time.LocalDate' with right expression of type 'java.lang.String' 도 발견하여 타입을 변경해주니 정상 작동함을 확인하였습니다.
+
+### 2)
 
 
 ## 6. 📝 배운 점 & 회고
 - 김영한 님의 스프링 강의에서 배운 **JPA의 영속성 컨텍스트** 개념을 실제로 적용해 보며, 엔티티 업데이트 시점이 언제 발생하는지 직접 확인할 수 있었습니다.
 - @DataJpaTest를 통해 웹 상으로 구현하지 않아도 테스트가 가능함을 확인했습니다. 스프링 데이터 JPA가 서버를 작동시켜 h2 데이터베이스를 사용하여 검증합니다.
 
-## 7. 🚀 설치 및 실행 방법 (How to run)
+
+## 7. 커밋 컨벤션 (Commit Convention)
+
+| 타입 | 설명 |
+|-|-|
+| **feat** | 새로운 기능 추가 |
+| **fix** | 버그 수정 |
+| **docs** | 문서 수정 (README, 주석, 가이드 등) |
+| **style** | 코드 포맷팅, 세미콜론 누락, 오타 수정 (로직 변경 없음) |
+| **refactor** | 코드 리팩토링 (기능 변경 없이 구조만 개선) |
+| **test** | 테스트 코드 추가/수정 |
+| **chore** | 빌드 설정, 패키지 매니저 설정, 라이브러리 추가 (코드 변경 없음) |
+
+
+## 8. 🚀 설치 및 실행 방법 (How to run)
 ### Backend
 ```bash
 cd backend
 ./gradlew bootRun
+
+
