@@ -16,6 +16,7 @@ public class Member {
     @Id
     @Column(name = "member_id")
     private String id;
+
     private String username;
     private String nickname;
     private int userPoint;
