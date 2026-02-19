@@ -7,7 +7,9 @@
 
 - **개발 기간:** 2026.02.02 ~ 2026.02.27 (약 4주)
 - **개발 인원:** 1인 개인 프로젝트
-- **참고:** [스프링 미니프로젝트 - ERD 작성 과정](https://devlog111.tistory.com/28)
+- **참고:** [스프링 미니프로젝트 - ERD 작성 과정](https://devlog111.tistory.com/28) </br>
+            [스프링 미니프로젝트 - HTTP API 설계 & 개발](https://devlog111.tistory.com/29)
+  
 
 ## 2. 🛠️ 기술 스택 (Tech Stack)
 
