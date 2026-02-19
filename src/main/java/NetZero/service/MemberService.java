@@ -2,6 +2,8 @@ package NetZero.service;
 
 import NetZero.domain.Member;
 import NetZero.dto.MemberResponse;
+import NetZero.exception.BusinessException;
+import NetZero.exception.ErrorCode;
 import NetZero.repository.MemberRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -18,7 +20,7 @@ public class MemberService {
 
     public MemberResponse getMemberInfo(String memberId){
         Member member = memberRepository.findById(memberId)
-                .orElseThrow(() -> new IllegalArgumentException("존재하지 않는 회원입니다."));
+                .orElseThrow(() -> new BusinessException(ErrorCode.USER_NOT_FOUND));
 
         return new MemberResponse(member);
     }

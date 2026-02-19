@@ -3,6 +3,8 @@ package NetZero.service;
 import NetZero.domain.Member;
 import NetZero.domain.StepInfo;
 import NetZero.dto.StepRequest;
+import NetZero.exception.BusinessException;
+import NetZero.exception.ErrorCode;
 import NetZero.repository.MemberRepository;
 import NetZero.repository.StepInfoRepository;
 import lombok.RequiredArgsConstructor;
@@ -20,7 +22,7 @@ public class StepService {
     @Transactional
     public void saveStep(StepRequest stepRequest) {
         Member member = memberRepository.findById(stepRequest.getUserId()).orElseThrow(
-                () -> new IllegalArgumentException("존재하지 않는 ID입니다.")
+                () -> new BusinessException(ErrorCode.USER_NOT_FOUND)
         );
 
         StepInfo stepInfo = new StepInfo(member, stepRequest.getStepCount(), stepRequest.getRecordDate());
