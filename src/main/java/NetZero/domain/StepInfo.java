@@ -26,4 +26,8 @@ public class StepInfo {
         this.stepCount = stepCount;
         this.recordDate = recordDate;
     }
+
+    public void updateSteps(int stepCount) {
+        this.stepCount = stepCount;
+    }
 }

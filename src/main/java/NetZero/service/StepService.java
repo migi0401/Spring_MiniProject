@@ -8,7 +8,6 @@ import NetZero.exception.ErrorCode;
 import NetZero.repository.MemberRepository;
 import NetZero.repository.StepInfoRepository;
 import lombok.RequiredArgsConstructor;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -25,8 +24,13 @@ public class StepService {
                 () -> new BusinessException(ErrorCode.USER_NOT_FOUND)
         );
 
-        StepInfo stepInfo = new StepInfo(member, stepRequest.getStepCount(), stepRequest.getRecordDate());
+        StepInfo existingStep = stepInfoRepository.findByMemberAndRecordDate(member, stepRequest.getRecordDate()).orElse(null);
 
-        stepInfoRepository.save(stepInfo);
+        if(existingStep != null){
+            existingStep.updateSteps(stepRequest.getStepCount());
+        }else{
+            StepInfo newStep = new StepInfo(member, stepRequest.getStepCount(), stepRequest.getRecordDate());
+            stepInfoRepository.save(newStep);
+        }
     }
 }
