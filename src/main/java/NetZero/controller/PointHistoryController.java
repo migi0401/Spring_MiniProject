@@ -2,7 +2,7 @@ package NetZero.controller;
 
 import NetZero.domain.Member;
 import NetZero.dto.PointHistoryResponse;
-import NetZero.service.PointHistoryService;
+import NetZero.service.PointService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -16,7 +16,7 @@ import java.util.List;
 @RequiredArgsConstructor
 public class PointHistoryController {
 
-    private final PointHistoryService pointHistoryService;
+    private final PointService pointHistoryService;
 
     @GetMapping("/{memberId}/histories")
     public List<PointHistoryResponse> getPointHistories(@PathVariable("memberId") Member member) {

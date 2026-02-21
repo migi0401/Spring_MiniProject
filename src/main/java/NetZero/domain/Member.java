@@ -20,6 +20,7 @@ public class Member {
     private String username;
     private String nickname;
     private int userPoint;
+    private int totalSteps;
 
     @OneToMany(mappedBy = "member", cascade = CascadeType.ALL)
     private List<PointHistory> pointHistories = new ArrayList<>();
@@ -35,6 +36,18 @@ public class Member {
         this.username = username;
         this.nickname = nickname;
         this.userPoint = 0;
+        this.totalSteps = 0;
     }
 
+    public void appPoint(int point){
+        if(point>0){
+            this.userPoint += point;
+        }
+    }
+
+    public void addTotalSteps(int addSteps){
+        if(addSteps>0){
+            this.totalSteps += addSteps;
+        }
+    }
 }

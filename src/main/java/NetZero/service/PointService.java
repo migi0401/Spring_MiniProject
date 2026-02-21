@@ -14,7 +14,7 @@ import java.util.stream.Collectors;
 @Service
 @Transactional
 @RequiredArgsConstructor
-public class PointHistoryService {
+public class PointService {
 
     private final PointHistoryRepository pointHistoryRepository;
 
@@ -24,5 +24,16 @@ public class PointHistoryService {
         return histories.stream() //엔티티 리스트들을 DTO 리스트로 변환
                 .map(PointHistoryResponse::new) //하나하나를 DTO로 바꿈
                 .collect(Collectors.toList());  // 다시 리스트로 묶음
+    }
+
+    public void rewardStepPoints(Member member, int oldSteps, int newSteps){
+        int oldPoints = oldSteps / 100;
+        int newPoints = newSteps / 100;
+        int earnedPoints = newPoints - oldPoints;
+
+        if(earnedPoints > 0){
+            member.appPoint(earnedPoints);
+            pointHistoryRepository.save(new PointHistory(member, earnedPoints, "걸음 수 달성 보상"));
+        }
     }
 }
