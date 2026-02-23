@@ -1,9 +1,9 @@
 package NetZero.domain;
 
+import NetZero.exception.ErrorCode;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
-import lombok.Setter;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -29,7 +29,7 @@ public class Member {
     private List<StepInfo> stepInfos = new ArrayList<>();
 
     @OneToMany(mappedBy = "member", cascade = CascadeType.ALL)
-    private List<CouponInfo> couponInfos = new ArrayList<>();
+    private List<MemberCoupon> couponInfos = new ArrayList<>();
 
     public Member(String id, String username, String nickname, int userPoint){
         this.id = id;
@@ -43,6 +43,11 @@ public class Member {
         if(point>0){
             this.userPoint += point;
         }
+    }
+
+    public void usePoint(int price){
+        //예외 처리 필요
+        this.userPoint -= price;
     }
 
     public void addTotalSteps(int addSteps){
