@@ -13,7 +13,7 @@ public class MemberCoupon {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private long MemberCouponId; //영수증 아이디
+    private long memberCouponId; //영수증 아이디
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "member_id")
@@ -23,14 +23,14 @@ public class MemberCoupon {
     @JoinColumn(name = "coupon_id")
     private Coupon coupon;
 
-    private String couponName;
+    private String barcode;
     private LocalDate validDate;
     private boolean isUsed;
 
-    public MemberCoupon(Member member, Coupon coupon, String couponName, LocalDate validDate) {
+    public MemberCoupon(Member member, Coupon coupon, String barcode, LocalDate validDate) {
         this.member = member;
         this.coupon = coupon;
-        this.couponName = couponName;
+        this.barcode = barcode;
         this.validDate = validDate;
         this.isUsed = false;
     }

@@ -1,24 +1,32 @@
 package NetZero.controller;
 
 import NetZero.domain.Member;
-import NetZero.dto.CouponResponse;
+import NetZero.domain.MemberCoupon;
+import NetZero.dto.CouponRequest;
+import NetZero.dto.MyCouponResponse;
 import NetZero.service.CouponService;
 import lombok.RequiredArgsConstructor;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
 @RestController
-@RequestMapping("/api/members")
+@RequestMapping("/api/coupons")
 @RequiredArgsConstructor
 public class CouponController {
+
     private final CouponService couponService;
 
-    @GetMapping("/{memberId}/coupons")
-    public List<CouponResponse> getMyCoupons(@PathVariable("memberId") Member member){
-        return couponService.getMyCoupons(member);
+    @GetMapping ("/{memberId}/coupons")
+    public List<MyCouponResponse> getMyCoupons(@PathVariable("memberId") Member member){
+        return couponService.getMyCoupons(member.getId());
+    }
+
+    @PostMapping ("/{couponId}/purchase")
+    public MyCouponResponse purchaseCoupon(@PathVariable("couponId") Long couponId, @RequestBody CouponRequest couponRequest){
+        MemberCoupon memberCoupon = couponService.purchaseCoupon(couponRequest.getMemberId(), couponId);
+
+        return MyCouponResponse.from(memberCoupon);
     }
 }
