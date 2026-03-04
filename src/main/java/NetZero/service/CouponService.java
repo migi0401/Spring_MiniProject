@@ -4,6 +4,7 @@ import NetZero.domain.Coupon;
 import NetZero.domain.Member;
 import NetZero.domain.MemberCoupon;
 import NetZero.domain.PointHistory;
+import NetZero.dto.CouponShopResponse;
 import NetZero.dto.MyCouponResponse;
 import NetZero.exception.BusinessException;
 import NetZero.exception.ErrorCode;
@@ -18,6 +19,7 @@ import org.springframework.transaction.annotation.Transactional;
 import java.time.LocalDate;
 import java.util.List;
 import java.util.UUID;
+import java.util.stream.Collectors;
 
 @Service
 @RequiredArgsConstructor
@@ -57,4 +59,12 @@ public class CouponService {
         MemberCoupon memberCoupon = new MemberCoupon(member, coupon, barcode, validDate);
         return memberCouponRepository.save(memberCoupon);
     }
+
+    @Transactional(readOnly = true)
+    public List<CouponShopResponse> getAllCoupons(){
+        return couponRepository.findAll().stream()
+                .map(CouponShopResponse::from)
+                .collect(Collectors.toList());
+    }
+
 }

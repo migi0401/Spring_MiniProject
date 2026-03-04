@@ -19,7 +19,7 @@ public class PointHistoryController {
     private final PointService pointHistoryService;
 
     @GetMapping("/{memberId}/histories")
-    public List<PointHistoryResponse> getPointHistories(@PathVariable("memberId") Member member) {
-        return pointHistoryService.getPointHistories(member);
+    public List<PointHistoryResponse> getPointHistories(@PathVariable("memberId") String memberId) {
+        return pointHistoryService.getPointHistories(memberId);
     }
 }

@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 @Service
@@ -18,8 +19,8 @@ public class PointService {
 
     private final PointHistoryRepository pointHistoryRepository;
 
-    public List<PointHistoryResponse> getPointHistories(Member member){
-        List<PointHistory> histories = pointHistoryRepository.findByMember(member);
+    public List<PointHistoryResponse> getPointHistories(String memberId){
+        List<PointHistory> histories = pointHistoryRepository.findByMemberId(memberId);
 
         return histories.stream() //엔티티 리스트들을 DTO 리스트로 변환
                 .map(PointHistoryResponse::new) //하나하나를 DTO로 바꿈

@@ -3,6 +3,7 @@ package NetZero.controller;
 import NetZero.domain.Member;
 import NetZero.domain.MemberCoupon;
 import NetZero.dto.CouponRequest;
+import NetZero.dto.CouponShopResponse;
 import NetZero.dto.MyCouponResponse;
 import NetZero.service.CouponService;
 import lombok.RequiredArgsConstructor;
@@ -28,5 +29,11 @@ public class CouponController {
         MemberCoupon memberCoupon = couponService.purchaseCoupon(couponRequest.getMemberId(), couponId);
 
         return MyCouponResponse.from(memberCoupon);
+    }
+
+    @GetMapping
+    public ResponseEntity<List<CouponShopResponse>> getStoreCoupons(){
+        List<CouponShopResponse> coupons = couponService.getAllCoupons();
+        return ResponseEntity.ok(coupons);
     }
 }
